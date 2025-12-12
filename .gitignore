@@ -27,3 +27,8 @@ dist-ssr
 *.private.js
 *.private.jsx
 milestones.private.js*.private.js
+
+# Private photos - DO NOT COMMIT
+public/images/*
+!public/images/.gitkeep
+
