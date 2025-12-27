@@ -23,198 +23,120 @@ const useIntersectionObserver = (options) => {
   return [ref, visible];
 };
 
-const PhotoGalleryModal = ({ isOpen, currentIndex, milestones, onClose, onNavigate }) => {
-  const [zoom, setZoom] = useState(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [isClosing, setIsClosing] = useState(false);
+// Parallax Background Component
+const ParallaxBackground = () => {
+  const [scrollY, setScrollY] = useState(0);
 
-  const currentMilestone = milestones[currentIndex];
-
-  // Reset zoom and position when image changes
   useEffect(() => {
-    setZoom(1);
-    setPosition({ x: 0, y: 0 });
-  }, [currentIndex]);
-
-  // Close handler with animation
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setIsClosing(false);
-      onClose();
-    }, 300);
-  };
-
-  // Keyboard navigation
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') handleClose();
-      if (e.key === 'ArrowLeft') onNavigate('prev');
-      if (e.key === 'ArrowRight') onNavigate('next');
-      if (e.key === '+' || e.key === '=') handleZoom('in');
-      if (e.key === '-') handleZoom('out');
-      if (e.key === '0') handleZoomReset();
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, currentIndex]);
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  const handleZoom = (direction) => {
-    setZoom(prev => {
-      const newZoom = direction === 'in' ? prev * 1.2 : prev / 1.2;
-      return Math.max(0.5, Math.min(3, newZoom));
-    });
-  };
-
-  const handleZoomReset = () => {
-    setZoom(1);
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const handleMouseDown = (e) => {
-    if (zoom > 1) {
-      setIsDragging(true);
-      setDragStart({
-        x: e.clientX - position.x,
-        y: e.clientY - position.y
-      });
-    }
-  };
-
-  const handleMouseMove = (e) => {
-    if (isDragging && zoom > 1) {
-      setPosition({
-        x: e.clientX - dragStart.x,
-        y: e.clientY - dragStart.y
-      });
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleWheel = (e) => {
-    e.preventDefault();
-    if (e.deltaY < 0) {
-      handleZoom('in');
-    } else {
-      handleZoom('out');
-    }
-  };
-
-  if (!isOpen) return null;
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div 
-      className={`modal-overlay ${isClosing ? 'closing' : ''}`}
-      onClick={handleClose}
-    >
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {/* Close Button */}
-        <button className="modal-close" onClick={handleClose} title="Close (Esc)">
-          ×
-        </button>
-
-        {/* Counter */}
-        <div className="modal-counter">
-          {currentIndex + 1} / {milestones.length}
-        </div>
-
-        {/* Navigation Buttons */}
-        <button 
-          className="modal-nav prev" 
-          onClick={() => onNavigate('prev')}
-          disabled={currentIndex === 0}
-          title="Previous (←)"
-        >
-          ‹
-        </button>
-        <button 
-          className="modal-nav next" 
-          onClick={() => onNavigate('next')}
-          disabled={currentIndex === milestones.length - 1}
-          title="Next (→)"
-        >
-          ›
-        </button>
-
-        {/* Image Container */}
-        <div 
-          className={`modal-image-container ${isDragging ? 'grabbing' : ''}`}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onWheel={handleWheel}
-        >
-          <img
-            src={currentMilestone.imageUrl}
-            alt={currentMilestone.title}
-            className="modal-image"
-            style={{
-              transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
-              cursor: zoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default'
-            }}
-            draggable={false}
-          />
-        </div>
-
-        {/* Image Info */}
-        <div className="modal-info">
-          <h3>{currentMilestone.title}</h3>
-          <p>{currentMilestone.date}</p>
-        </div>
-
-        {/* Zoom Controls */}
-        <div className="zoom-controls">
-          <button 
-            className="zoom-btn" 
-            onClick={() => handleZoom('out')}
-            title="Zoom Out (-)"
-            disabled={zoom <= 0.5}
-          >
-            −
-          </button>
-          <button 
-            className="zoom-btn" 
-            onClick={handleZoomReset}
-            title="Reset Zoom (0)"
-          >
-            ⟲
-          </button>
-          <button 
-            className="zoom-btn" 
-            onClick={() => handleZoom('in')}
-            title="Zoom In (+)"
-            disabled={zoom >= 3}
-          >
-            +
-          </button>
-        </div>
-      </div>
+    <div className="parallax-container">
+      <div 
+        className="parallax-layer layer-1" 
+        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+      />
+      <div 
+        className="parallax-layer layer-2" 
+        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+      />
+      <div 
+        className="parallax-layer layer-3" 
+        style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+      />
     </div>
   );
 };
 
-const TimelineItem = ({ milestone, onClick }) => {
+// Particle Hearts Component
+const ParticleHearts = () => {
+  const [particles, setParticles] = useState([]);
+  const [floatingHearts, setFloatingHearts] = useState([]);
+  const nextId = useRef(0);
+
+  // Generate initial floating hearts
+  useEffect(() => {
+    const hearts = Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 10,
+      duration: 15 + Math.random() * 10,
+      size: 20 + Math.random() * 30,
+      emoji: ['💕', '💝', '❤️', '💖', '💗'][Math.floor(Math.random() * 5)]
+    }));
+    setFloatingHearts(hearts);
+  }, []);
+
+  const createBurst = (x, y) => {
+    const burstParticles = Array.from({ length: 12 }, () => ({
+      id: nextId.current++,
+      x,
+      y,
+      angle: Math.random() * Math.PI * 2,
+      velocity: 2 + Math.random() * 3,
+      emoji: ['💕', '💝', '❤️', '💖', '💗'][Math.floor(Math.random() * 5)],
+      size: 15 + Math.random() * 15
+    }));
+
+    setParticles(prev => [...prev, ...burstParticles]);
+
+    setTimeout(() => {
+      setParticles(prev => prev.filter(p => !burstParticles.find(bp => bp.id === p.id)));
+    }, 2000);
+  };
+
+  // Handle clicks at document level so page content remains clickable
+  useEffect(() => {
+    const handleClick = (e) => {
+      createBurst(e.clientX, e.clientY);
+    };
+
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  return (
+    <div className="particle-hearts-container">
+      {/* Floating background hearts */}
+      {floatingHearts.map(heart => (
+        <div
+          key={heart.id}
+          className="floating-particle-heart"
+          style={{
+            left: `${heart.left}%`,
+            fontSize: `${heart.size}px`,
+            animationDelay: `${heart.delay}s`,
+            animationDuration: `${heart.duration}s`
+          }}
+        >
+          {heart.emoji}
+        </div>
+      ))}
+
+      {/* Burst particles */}
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="burst-particle"
+          style={{
+            left: `${particle.x}px`,
+            top: `${particle.y}px`,
+            fontSize: `${particle.size}px`,
+            '--angle': `${particle.angle}rad`,
+            '--velocity': particle.velocity
+          }}
+        >
+          {particle.emoji}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const TimelineItem = ({ milestone }) => {
   const [ref, show] = useIntersectionObserver({ threshold: 0.2 });
   const itemClass = 'timeline-item ' + milestone.position + (show ? ' show' : '');
 
@@ -223,14 +145,47 @@ const TimelineItem = ({ milestone, onClick }) => {
       <div className="timeline-content">
         <h2>{milestone.title}</h2>
         <p className="date">{milestone.date}</p>
-        <img 
-          src={milestone.imageUrl} 
-          alt={milestone.title}
-          onClick={onClick}
-          title="Click to view full size"
-        />
+        <img src={milestone.imageUrl} alt={milestone.title} />
         <p>{milestone.description}</p>
       </div>
+    </div>
+  );
+};
+
+const MemoryCounter = ({ timeStats, specialMilestone }) => {
+  return (
+    <div className="memory-counter">
+      <div className="counter-grid">
+        <div className="counter-item">
+          <div className="counter-value">{timeStats.years}</div>
+          <div className="counter-label">Year{timeStats.years !== 1 ? 's' : ''}</div>
+        </div>
+        <div className="counter-item">
+          <div className="counter-value">{timeStats.months % 12}</div>
+          <div className="counter-label">Month{(timeStats.months % 12) !== 1 ? 's' : ''}</div>
+        </div>
+        <div className="counter-item">
+          <div className="counter-value">{timeStats.days}</div>
+          <div className="counter-label">Day{timeStats.days !== 1 ? 's' : ''}</div>
+        </div>
+        <div className="counter-item">
+          <div className="counter-value">{timeStats.hours}</div>
+          <div className="counter-label">Hour{timeStats.hours !== 1 ? 's' : ''}</div>
+        </div>
+        <div className="counter-item">
+          <div className="counter-value">{timeStats.minutes}</div>
+          <div className="counter-label">Minute{timeStats.minutes !== 1 ? 's' : ''}</div>
+        </div>
+        <div className="counter-item">
+          <div className="counter-value">{timeStats.seconds}</div>
+          <div className="counter-label">Second{timeStats.seconds !== 1 ? 's' : ''}</div>
+        </div>
+      </div>
+      {specialMilestone && (
+        <div className="special-milestone">
+          {specialMilestone}
+        </div>
+      )}
     </div>
   );
 };
@@ -238,9 +193,54 @@ const TimelineItem = ({ milestone, onClick }) => {
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [timeStats, setTimeStats] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    months: 0,
+    years: 0
+  });
 
+  // Your relationship start date - UPDATE THIS DATE!
+  const startDate = new Date('2024-09-04T00:00:00');
+
+  // Calculate time together
+  useEffect(() => {
+    const calculateTime = () => {
+      const now = new Date();
+      const diff = now - startDate;
+      
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      
+      // Calculate months and years
+      let years = now.getFullYear() - startDate.getFullYear();
+      let months = now.getMonth() - startDate.getMonth();
+      
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+      
+      setTimeStats({
+        days,
+        hours: hours % 24,
+        minutes: minutes % 60,
+        seconds: seconds % 60,
+        months: years * 12 + months,
+        years
+      });
+    };
+
+    calculateTime();
+    const interval = setInterval(calculateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Loading animation
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
@@ -256,21 +256,17 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const openModal = (index) => {
-    setCurrentImageIndex(index);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
-  const navigateImage = (direction) => {
-    if (direction === 'prev' && currentImageIndex > 0) {
-      setCurrentImageIndex(currentImageIndex - 1);
-    } else if (direction === 'next' && currentImageIndex < milestones.length - 1) {
-      setCurrentImageIndex(currentImageIndex + 1);
-    }
+  // Check for special milestones
+  const getSpecialMilestone = () => {
+    const { days, months, years } = timeStats;
+    
+    if (days === 365 || days === 730 || days === 1095) return `🎊 ${years} Year${years > 1 ? 's' : ''} Together!`;
+    if (days === 1000) return '🎉 1000 Days of Love!';
+    if (days === 500) return '💫 500 Days Milestone!';
+    if (days === 100) return '✨ 100 Days Together!';
+    if (months > 0 && months % 6 === 0) return `💝 ${months} Months & Counting!`;
+    
+    return null;
   };
 
   if (loading) {
@@ -291,8 +287,13 @@ export default function App() {
     );
   }
 
+  const specialMilestone = getSpecialMilestone();
+
   return (
     <div className="page">
+      <ParallaxBackground />
+      <ParticleHearts />
+      
       <section className="hero">
         <div className="hero-content">
           <div className="hero-hearts">
@@ -303,6 +304,9 @@ export default function App() {
           <h1 className="hero-title">Our Love Story</h1>
           <p className="hero-subtitle">Reymart & Keisha</p>
           <div className="hero-date">2024 — death</div>
+          
+          <MemoryCounter timeStats={timeStats} specialMilestone={specialMilestone} />
+          
           <div className="scroll-indicator">
             <div className="scroll-arrow"></div>
           </div>
@@ -310,24 +314,10 @@ export default function App() {
       </section>
 
       <main className="timeline">
-        {milestones.map((m, index) => (
-          <TimelineItem 
-            key={m.id} 
-            milestone={m}
-            onClick={() => openModal(index)}
-          />
-        ))}
+        {milestones.map(m => <TimelineItem key={m.id} milestone={m} />)}
       </main>
 
       <footer>❤️ To be continue...</footer>
-
-      <PhotoGalleryModal
-        isOpen={modalOpen}
-        currentIndex={currentImageIndex}
-        milestones={milestones}
-        onClose={closeModal}
-        onNavigate={navigateImage}
-      />
     </div>
   );
 }
