@@ -1,7 +1,8 @@
 let milestones = [];
 
 try {
-  const module = await import('./milestones.private.js');
+  // @vite-ignore prevents build failure when file doesn't exist
+  const module = await import(/* @vite-ignore */ './milestones.private.js');
   milestones = module.default;
 } catch (err) {
   milestones = [
