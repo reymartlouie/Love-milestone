@@ -1,23 +1,29 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { existsSync } from 'fs'
-import { resolve } from 'path'
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // Plugin to handle optional private milestones file
 function optionalPrivateFiles() {
+  const privateFilePath = resolve(__dirname, 'src/milestones.private.js')
+  const fileExists = existsSync(privateFilePath)
+
   return {
     name: 'optional-private-files',
-    resolveId(source, importer) {
-      if (source.endsWith('milestones.private.js')) {
-        const fullPath = resolve(importer ? importer.replace(/[^/]+$/, '') : '', source)
-        if (!existsSync(fullPath)) {
-          return { id: 'virtual:empty-milestones', moduleSideEffects: false }
+    enforce: 'pre',
+    resolveId(source) {
+      if (source === './milestones.private.js' || source.endsWith('/milestones.private.js')) {
+        if (!fileExists) {
+          return '\0virtual:empty-milestones'
         }
       }
       return null
     },
     load(id) {
-      if (id === 'virtual:empty-milestones') {
+      if (id === '\0virtual:empty-milestones') {
         return 'export default null;'
       }
       return null
