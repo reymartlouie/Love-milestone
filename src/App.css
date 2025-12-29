@@ -45,7 +45,7 @@ body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 9998;
+  z-index: 0;
 }
 
 .floating-particle-heart {
@@ -82,7 +82,7 @@ body {
   pointer-events: none;
   user-select: none;
   animation: burst 1s ease-out forwards;
-  z-index: 9999;
+  z-index: 0;
 }
 
 @keyframes burst {
@@ -247,6 +247,8 @@ body {
   text-align: left;
   max-width: min(700px, 60vw);
   animation: fadeInUp 0.8s ease;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes fadeInUp {
@@ -260,25 +262,47 @@ body {
   }
 }
 
-.hero-hearts {
-  margin-bottom: 24px;
+/* Background floating hearts */
+.hero-hearts-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.floating-heart {
-  display: inline-block;
-  font-size: clamp(24px, 4vw, 32px);
-  margin: 0 clamp(4px, 1vw, 8px);
-  animation: gentleBounce 3s ease-in-out infinite;
-  opacity: 0.8;
+.floating-heart-bg {
+  position: absolute;
+  font-size: clamp(40px, 8vw, 80px);
+  opacity: 0.12;
+  animation: floatHeartBg 8s ease-in-out infinite;
 }
 
-.floating-heart:nth-child(1) { animation-delay: 0s; }
-.floating-heart:nth-child(2) { animation-delay: 0.5s; }
-.floating-heart:nth-child(3) { animation-delay: 1s; }
+.floating-heart-bg:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; animation-duration: 7s; }
+.floating-heart-bg:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; animation-duration: 9s; }
+.floating-heart-bg:nth-child(3) { top: 50%; left: 8%; animation-delay: 2s; animation-duration: 6s; }
+.floating-heart-bg:nth-child(4) { top: 70%; right: 5%; animation-delay: 0.5s; animation-duration: 8s; }
+.floating-heart-bg:nth-child(5) { top: 80%; left: 15%; animation-delay: 3s; animation-duration: 10s; }
+.floating-heart-bg:nth-child(6) { top: 30%; right: 20%; animation-delay: 1.5s; animation-duration: 7s; }
+.floating-heart-bg:nth-child(7) { top: 60%; left: 20%; animation-delay: 2.5s; animation-duration: 9s; }
+.floating-heart-bg:nth-child(8) { top: 40%; right: 8%; animation-delay: 0.8s; animation-duration: 8s; }
 
-@keyframes gentleBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@keyframes floatHeartBg {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-20px) rotate(5deg) scale(1.05);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg) scale(1);
+  }
+  75% {
+    transform: translateY(-25px) rotate(3deg) scale(1.03);
+  }
 }
 
 .hero-title {
@@ -470,29 +494,37 @@ body {
 }
 
 .scroll-indicator {
-  position: absolute;
-  bottom: clamp(32px, 6vh, 48px);
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  animation: pulseHint 2s ease-in-out infinite;
+  margin-top: clamp(32px, 6vh, 48px);
 }
 
-.scroll-arrow {
-  width: clamp(16px, 2.5vw, 20px);
-  height: clamp(16px, 2.5vw, 20px);
-  border-left: 2px solid var(--text-secondary);
-  border-bottom: 2px solid var(--text-secondary);
-  transform: rotate(-45deg);
-  animation: scrollDown 2s ease-in-out infinite;
+.scroll-indicator .key-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  font-size: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-@keyframes scrollDown {
+@keyframes pulseHint {
   0%, 100% {
-    transform: rotate(-45deg) translateY(0);
     opacity: 0.5;
   }
   50% {
-    transform: rotate(-45deg) translateY(6px);
-    opacity: 1;
+    opacity: 0.8;
   }
 }
 
@@ -575,10 +607,22 @@ body {
 .timeline-item.right { justify-content: flex-end; }
 
 .timeline-content {
-  background: var(--bg-primary);
-  padding: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(245, 245, 247, 0.8) 0%,
+    rgba(240, 240, 242, 0.6) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 24px;
   width: 46%;
   position: relative;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .timeline-content::before {
@@ -613,7 +657,7 @@ body {
 
 .timeline-content img {
   width: 100%;
-  border-radius: clamp(12px, 2vw, 18px);
+  border-radius: 32px;
   margin-bottom: clamp(12px, 2vw, 20px);
   object-fit: cover;
   transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -624,7 +668,7 @@ body {
   transform: scale(1.02);
 }
 
-.timeline-content p {
+.timeline-content p:last-child {
   color: var(--text-secondary);
   line-height: 1.5;
   font-size: clamp(14px, 1.8vw, 17px);
@@ -858,11 +902,6 @@ footer {
     font-size: 17px;
   }
 
-  .floating-heart {
-    font-size: 24px;
-    margin: 0 6px;
-  }
-
   .counter-grid {
     gap: 12px;
   }
@@ -919,7 +958,7 @@ footer {
   }
 
   .timeline-content img {
-    border-radius: 12px;
+    border-radius: 32px;
   }
 
   /* Mobile modal */

@@ -515,12 +515,17 @@ export default function App() {
       
       <section className="hero">
         <ScatteredPhotos show={!loading} />
+        <div className="hero-hearts-background">
+          <span className="floating-heart-bg">💕</span>
+          <span className="floating-heart-bg">💝</span>
+          <span className="floating-heart-bg">❤️</span>
+          <span className="floating-heart-bg">💖</span>
+          <span className="floating-heart-bg">💗</span>
+          <span className="floating-heart-bg">💕</span>
+          <span className="floating-heart-bg">💝</span>
+          <span className="floating-heart-bg">❤️</span>
+        </div>
         <div className="hero-content">
-          <div className="hero-hearts">
-            <span className="floating-heart">💕</span>
-            <span className="floating-heart">💝</span>
-            <span className="floating-heart">❤️</span>
-          </div>
           <h1 className="hero-title">Our Love Story</h1>
           <p className="hero-subtitle">Reymart & Keisha</p>
           <div className="hero-date">2024 — Death</div>
@@ -528,7 +533,7 @@ export default function App() {
           <MemoryCounter timeStats={timeStats} specialMilestone={specialMilestone} />
 
           <div className="scroll-indicator">
-            <div className="scroll-arrow"></div>
+            <span className="key-hint">Space</span> to scroll
           </div>
         </div>
       </section>
