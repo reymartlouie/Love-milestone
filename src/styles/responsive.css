@@ -1,0 +1,186 @@
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Landscape orientation */
+@media (orientation: landscape) and (max-height: 600px) {
+  .scattered-photo img {
+    width: clamp(40px, 12vh, 80px);
+    height: clamp(40px, 12vh, 80px);
+  }
+
+  .scattered-photo.top-right { top: 10vh; right: 3vw; }
+  .scattered-photo.right { top: 45vh; right: 2vw; }
+  .scattered-photo.bottom-right { bottom: 10vh; right: 3vw; }
+  .scattered-photo.bottom,
+  .scattered-photo.top { display: none; }
+}
+
+/* Wide screens */
+@media (min-width: 1400px) {
+  .scattered-photo img {
+    width: clamp(100px, 8vw, 150px);
+    height: clamp(100px, 8vw, 150px);
+  }
+
+  .scattered-photo.top-right { right: 8vw; }
+  .scattered-photo.right { right: 5vw; }
+  .scattered-photo.bottom-right { right: 8vw; }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) and (orientation: portrait) {
+  .scattered-photo.top { display: none; }
+  .scattered-photo.bottom { right: 15vw; }
+}
+
+/* Mobile portrait */
+@media (max-width: 480px) and (orientation: portrait) {
+  .scattered-photo.right,
+  .scattered-photo.bottom { display: none; }
+  .scattered-photo.top-right { top: 3vh; right: 3vw; }
+  .scattered-photo.bottom-right { bottom: 15vh; right: 3vw; }
+}
+
+/* Very tall screens (mobile) */
+@media (max-width: 480px) and (min-height: 700px) {
+  .scattered-photo.bottom-right { bottom: 20vh; }
+}
+
+/* Square-ish aspect ratios */
+@media (min-aspect-ratio: 3/4) and (max-aspect-ratio: 4/3) {
+  .scattered-photo.top { right: 20vw; }
+  .scattered-photo.bottom { right: 20vw; }
+}
+
+/* Large tablets */
+@media (max-width: 1068px) {
+  .hero-title { font-size: 72px; }
+  .hero-subtitle { font-size: 28px; }
+  .counter-value { font-size: 40px; }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .hero {
+    padding: 80px 24px;
+    padding-left: 24px;
+  }
+
+  .hero-title { font-size: 48px; }
+  .hero-subtitle { font-size: 24px; }
+  .hero-date { font-size: 17px; }
+
+  .counter-grid { gap: 12px; }
+  .counter-item { min-width: 60px; }
+  .counter-value { font-size: 32px; }
+  .counter-label { font-size: 10px; }
+
+  .timeline { padding: 48px 24px 80px; }
+
+  .timeline::before {
+    left: 16px;
+    top: 48px;
+    bottom: 80px;
+  }
+
+  .timeline-item { margin: 48px 0; }
+
+  .timeline-item.left,
+  .timeline-item.right { justify-content: flex-end; }
+
+  .timeline-content { width: calc(100% - 40px); }
+
+  .timeline-item.left .timeline-content::before,
+  .timeline-item.right .timeline-content::before {
+    left: -32px;
+    right: auto;
+    width: 7px;
+    height: 7px;
+  }
+
+  .timeline-content h2 { font-size: 21px; }
+  .timeline-content p { font-size: 15px; }
+  .timeline-content img { border-radius: 32px; }
+
+  /* Mobile modal */
+  .modal-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .modal-nav.prev { left: 12px; }
+  .modal-nav.next { right: 12px; }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .modal-counter {
+    top: 12px;
+    left: 12px;
+    font-size: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+  }
+
+  .zoom-controls {
+    top: 12px;
+    left: 80px;
+    padding: 6px 8px;
+    border-radius: 10px;
+  }
+
+  .zoom-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .modal-content { padding: 70px 24px 100px; }
+  .modal-image-container { border-radius: 16px; }
+  .modal-image {
+    max-height: 60vh;
+    border-radius: 16px;
+  }
+
+  .modal-info {
+    bottom: 16px;
+    padding: 12px 20px;
+    border-radius: 14px;
+  }
+
+  .modal-info h3 { font-size: 13px; }
+  .modal-info p { font-size: 10px; }
+
+  .floating-particle-heart { font-size: 12px !important; }
+  .burst-particle { font-size: 10px !important; }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .hero-title { font-size: 40px; }
+  .hero-subtitle { font-size: 21px; }
+  .counter-value { font-size: 28px; }
+  .timeline-content h2 { font-size: 19px; }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .floating-particle-heart,
+  .burst-particle { display: none; }
+}

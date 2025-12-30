@@ -1,0 +1,61 @@
+/* ===== FLOATING HEARTS & PARTICLES ===== */
+.particle-hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-particle-heart {
+  position: absolute;
+  bottom: -50px;
+  opacity: 0;
+  animation: floatUp 20s linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -50px;
+    opacity: 0;
+    transform: translateX(0);
+  }
+  5% { opacity: 0.15; }
+  95% { opacity: 0.15; }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(calc(var(--random-x, 0) * 50px));
+  }
+}
+
+.floating-particle-heart:nth-child(odd) { --random-x: 0.3; }
+.floating-particle-heart:nth-child(even) { --random-x: -0.3; }
+.floating-particle-heart:nth-child(3n) { --random-x: 0.5; }
+.floating-particle-heart:nth-child(5n) { --random-x: -0.5; }
+
+.burst-particle {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  animation: burst 1s ease-out forwards;
+  z-index: 0;
+}
+
+@keyframes burst {
+  0% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%)
+               translateX(calc(cos(var(--angle)) * var(--velocity) * 60px))
+               translateY(calc(sin(var(--angle)) * var(--velocity) * 60px))
+               scale(0.5);
+  }
+}

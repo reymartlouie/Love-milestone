@@ -1,0 +1,8 @@
+/* Main stylesheet - imports all style modules */
+@import './global.css';
+@import './particles.css';
+@import './loading.css';
+@import './hero.css';
+@import './timeline.css';
+@import './modal.css';
+@import './responsive.css';

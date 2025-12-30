@@ -1,0 +1,131 @@
+/* ===== LOADING SCREEN ===== */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loading-screen.fade-out {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.heart-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+}
+
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: var(--text-primary);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  animation: heartBeat 1s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--text-primary);
+  border-radius: 50%;
+}
+
+.heart::before { top: -20px; left: 0; }
+.heart::after { top: 0; left: 20px; }
+
+.heart-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: rgba(29, 29, 31, 0.1);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  animation: pulse 1s ease-out infinite;
+  border-radius: 4px;
+}
+
+.heart-pulse::before,
+.heart-pulse::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(29, 29, 31, 0.1);
+  border-radius: 50%;
+}
+
+.heart-pulse::before { top: -20px; left: 0; }
+.heart-pulse::after { top: 0; left: 20px; }
+
+@keyframes heartBeat {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.05); }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1.8);
+    opacity: 0;
+  }
+}
+
+.loading-text {
+  font-size: clamp(17px, 3vw, 21px);
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: clamp(16px, 3vw, 20px);
+  letter-spacing: -0.01em;
+}
+
+.progress-bar {
+  width: clamp(140px, 30vw, 180px);
+  height: 4px;
+  background: var(--bg-secondary);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 0 auto clamp(8px, 1.5vw, 12px);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: width 0.2s ease;
+}
+
+.progress-text {
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: var(--text-secondary);
+  font-weight: 400;
+}

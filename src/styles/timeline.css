@@ -1,0 +1,104 @@
+/* ===== TIMELINE ===== */
+.timeline {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(48px, 8vh, 80px) clamp(16px, 4vw, 24px) clamp(80px, 12vh, 120px);
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  width: 1px;
+  background: var(--border-light);
+  position: absolute;
+  top: clamp(48px, 8vh, 80px);
+  bottom: clamp(80px, 12vh, 120px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  width: 100%;
+  margin: clamp(40px, 8vh, 80px) 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item.left { justify-content: flex-start; }
+.timeline-item.right { justify-content: flex-end; }
+
+.timeline-content {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 245, 247, 0.8) 0%,
+    rgba(240, 240, 242, 0.6) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 24px;
+  width: 46%;
+  position: relative;
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  width: 9px;
+  height: 9px;
+  background: var(--bg-primary);
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.timeline-item.left .timeline-content::before { right: -54px; }
+.timeline-item.right .timeline-content::before { left: -54px; }
+
+.timeline-content h2 {
+  margin: 0 0 4px 0;
+  font-size: clamp(19px, 3vw, 28px);
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.timeline-content .date {
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0 0 clamp(12px, 2vw, 20px) 0;
+  font-size: clamp(12px, 1.5vw, 14px);
+}
+
+.timeline-content img {
+  width: 100%;
+  border-radius: 32px;
+  margin-bottom: clamp(12px, 2vw, 20px);
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  cursor: pointer;
+}
+
+.timeline-content img:hover {
+  transform: scale(1.02);
+}
+
+.timeline-content p:last-child {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: clamp(14px, 1.8vw, 17px);
+  font-weight: 400;
+}
