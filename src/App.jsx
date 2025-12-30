@@ -180,7 +180,13 @@ export default function App() {
 
           <MemoryCounter timeStats={timeStats} specialMilestone={specialMilestone} />
 
-          <MusicPlayer src="/audio/ilysb-stripped.mp3" shouldPlay={shouldPlayMusic} />
+          <MusicPlayer
+                playlist={[
+                  { src: '/audio/ilysb-stripped.mp3', title: 'ilysb' },
+                  { src: '/audio/tenefifsea.mp3', title: 'tenefifsea' }
+                ]}
+                shouldPlay={shouldPlayMusic}
+              />
 
           <div className="scroll-indicator">
             <span className="key-hint">Space</span> to scroll

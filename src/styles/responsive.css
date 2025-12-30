@@ -63,6 +63,12 @@
   .hero {
     padding: 80px 24px;
     padding-left: 24px;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    text-align: center;
   }
 
   .hero-title { font-size: 48px; }
@@ -74,10 +80,24 @@
     display: none;
   }
 
-  .counter-grid { gap: 12px; }
+  .counter-grid {
+    gap: 12px;
+    justify-content: center;
+  }
   .counter-item { min-width: 60px; }
   .counter-value { font-size: 32px; }
   .counter-label { font-size: 10px; }
+
+  .memory-counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Center music player on mobile */
+  .music-player {
+    justify-content: center;
+  }
 
   .timeline { padding: 48px 24px 80px; }
 

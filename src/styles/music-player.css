@@ -4,7 +4,13 @@
   align-items: center;
   gap: 8px;
   margin-top: 24px;
-  padding: 10px 16px;
+}
+
+/* Liquid Glass Container for each section */
+.player-section {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.7) 0%,
@@ -17,17 +23,37 @@
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  width: fit-content;
 }
 
-.music-btn {
-  width: 36px;
-  height: 36px;
+/* Title Section */
+.player-title-section {
+  padding: 8px 16px;
+}
+
+.player-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+
+/* Play/Pause Section */
+.player-control-section {
+  padding: 6px;
+}
+
+.player-btn {
+  width: 32px;
+  height: 32px;
   border: none;
   border-radius: 50%;
-  background: var(--text-primary);
-  color: #fff;
-  font-size: 12px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 300;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -35,12 +61,43 @@
   transition: all 0.2s ease;
 }
 
-.music-btn:hover {
-  transform: scale(1.08);
+.player-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
 }
 
-.music-btn.playing {
-  background: var(--accent);
+.player-btn:active {
+  transform: scale(0.95);
+}
+
+.player-btn.play-btn {
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+  background: var(--text-primary);
+  color: #fff;
+}
+
+.player-btn.play-btn:hover {
+  transform: scale(1.05);
+  background: var(--text-primary);
+}
+
+
+/* Nav Section */
+.player-nav-section {
+  padding: 6px 8px;
+  gap: 4px;
+}
+
+.player-btn.nav-btn {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* Volume Section */
+.player-volume-section {
+  padding: 6px 10px;
+  gap: 4px;
 }
 
 .volume-toggle {
@@ -48,17 +105,22 @@
   height: 32px;
   border: none;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.06);
-  font-size: 14px;
+  background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  color: var(--text-primary);
 }
 
 .volume-toggle:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.volume-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .volume-slider {
@@ -109,20 +171,58 @@
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .music-player {
-    padding: 8px 12px;
     gap: 6px;
+    justify-content: center;
   }
 
-  .music-btn {
+  .player-section {
+    padding: 6px 10px;
+  }
+
+  .player-title-section {
+    padding: 6px 12px;
+  }
+
+  .player-title {
+    font-size: 13px;
+  }
+
+  .player-control-section {
+    padding: 4px;
+  }
+
+  .player-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .player-btn.play-btn {
     width: 32px;
     height: 32px;
-    font-size: 10px;
+    font-size: 12px;
+  }
+
+  .player-btn.nav-btn {
+    font-size: 18px;
+  }
+
+  .player-nav-section {
+    padding: 4px 6px;
+  }
+
+  .player-volume-section {
+    padding: 4px 8px;
   }
 
   .volume-toggle {
     width: 28px;
     height: 28px;
-    font-size: 12px;
+  }
+
+  .volume-icon {
+    width: 16px;
+    height: 16px;
   }
 
   .volume-slider.show {
