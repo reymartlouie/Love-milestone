@@ -10,7 +10,8 @@ import {
   PhotoModal,
   ScatteredPhotos,
   MemoryCounter,
-  MusicPlayer
+  MusicPlayer,
+  LoveLetter
 } from './components';
 
 // Your relationship start date
@@ -18,6 +19,9 @@ const START_DATE = new Date('2024-09-04T00:00:00');
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const [showLetter, setShowLetter] = useState(false);
+  const [showMain, setShowMain] = useState(false);
+  const [shouldPlayMusic, setShouldPlayMusic] = useState(false);
   const [progress, setProgress] = useState(0);
   const [timeStats, setTimeStats] = useState({
     days: 0,
@@ -78,7 +82,10 @@ export default function App() {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setLoading(false), 500);
+          setTimeout(() => {
+            setLoading(false);
+            setShowLetter(true);
+          }, 500);
           return 100;
         }
         return prev + 2;
@@ -103,6 +110,17 @@ export default function App() {
     return null;
   };
 
+  // Handle love letter completion
+  const handleLetterComplete = () => {
+    setShowLetter(false);
+    setShowMain(true);
+  };
+
+  // Handle music play trigger from letter
+  const handlePlayMusic = () => {
+    setShouldPlayMusic(true);
+  };
+
   // Loading screen
   if (loading) {
     return (
@@ -122,6 +140,19 @@ export default function App() {
     );
   }
 
+  // Love letter screen
+  if (showLetter) {
+    return (
+      <LoveLetter
+        onComplete={handleLetterComplete}
+        onPlayMusic={handlePlayMusic}
+      />
+    );
+  }
+
+  // Main content
+  if (!showMain) return null;
+
   const specialMilestone = getSpecialMilestone();
 
   return (
@@ -131,7 +162,7 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="hero">
-        <ScatteredPhotos show={!loading} />
+        <ScatteredPhotos show={true} />
         <div className="hero-hearts-background">
           <span className="floating-heart-bg">💕</span>
           <span className="floating-heart-bg">💝</span>
@@ -149,7 +180,7 @@ export default function App() {
 
           <MemoryCounter timeStats={timeStats} specialMilestone={specialMilestone} />
 
-          <MusicPlayer src="/audio/ilysb-stripped.mp3" autoPlay />
+          <MusicPlayer src="/audio/ilysb-stripped.mp3" shouldPlay={shouldPlayMusic} />
 
           <div className="scroll-indicator">
             <span className="key-hint">Space</span> to scroll

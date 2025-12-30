@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 
-const MusicPlayer = ({ src = '/audio/song.mp3', autoPlay = false }) => {
+const MusicPlayer = ({ src = '/audio/song.mp3', shouldPlay = false }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [showVolume, setShowVolume] = useState(false);
-  const [autoPlayAttempted, setAutoPlayAttempted] = useState(false);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -13,40 +12,14 @@ const MusicPlayer = ({ src = '/audio/song.mp3', autoPlay = false }) => {
     }
   }, [volume]);
 
-  // Attempt autoplay when component mounts
+  // Trigger play when shouldPlay becomes true
   useEffect(() => {
-    if (autoPlay && audioRef.current && !autoPlayAttempted) {
-      setAutoPlayAttempted(true);
-
-      // Small delay to ensure everything is loaded
-      const timer = setTimeout(() => {
-        audioRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {
-            // Autoplay blocked by browser - user needs to click
-            setIsPlaying(false);
-          });
-      }, 500);
-
-      return () => clearTimeout(timer);
+    if (shouldPlay && audioRef.current && !isPlaying) {
+      audioRef.current.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {});
     }
-  }, [autoPlay, autoPlayAttempted]);
-
-  // Space key triggers play (works with scroll hint)
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.code === 'Space' && !isPlaying && audioRef.current) {
-        audioRef.current.play()
-          .then(() => setIsPlaying(true))
-          .catch(() => {});
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isPlaying]);
+  }, [shouldPlay]);
 
   const togglePlay = () => {
     if (!audioRef.current) return;
