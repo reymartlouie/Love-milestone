@@ -137,7 +137,7 @@ export default function App() {
             <div className="heart"></div>
             <div className="heart-pulse"></div>
           </div>
-          <h2 className="loading-text">Loading Our Story...</h2>
+          <h2 className="loading-text">Loading...</h2>
           <div className="progress-bar">
             <div className="progress-fill" style={{ width: `${progress}%` }}></div>
           </div>

@@ -12,6 +12,7 @@ const TimelineItem = ({ milestone, onImageClick }) => {
         <img
           src={milestone.imageUrl}
           alt={milestone.title}
+          loading="lazy"
           onClick={() => onImageClick(milestone)}
         />
         <p>{milestone.description}</p>

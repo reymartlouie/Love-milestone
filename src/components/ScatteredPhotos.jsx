@@ -20,7 +20,7 @@ const ScatteredPhotos = ({ show }) => {
             '--rotation': `${photo.rotation}deg`,
           }}
         >
-          <img src={photo.src} alt="" />
+          <img src={photo.src} alt="" loading="lazy" />
         </div>
       ))}
     </div>
