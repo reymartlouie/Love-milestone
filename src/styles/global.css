@@ -3,6 +3,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ===== MOBILE SCROLL SNAP ===== */
+@media (max-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .hero,
+  .timeline {
+    scroll-snap-align: start;
+  }
+
+  /* Improve touch scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

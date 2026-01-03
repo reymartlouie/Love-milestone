@@ -187,6 +187,26 @@
   50% { opacity: 0.8; }
 }
 
+/* ===== MOBILE SWIPE INDICATOR ===== */
+.swipe-indicator {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  animation: pulseHint 2s ease-in-out infinite;
+  margin-top: clamp(32px, 6vh, 48px);
+}
+
+@media (max-width: 768px) {
+  .swipe-indicator {
+    display: flex;
+  }
+}
+
 /* ===== MEMORY COUNTER ===== */
 .memory-counter {
   margin: 32px 0 0;

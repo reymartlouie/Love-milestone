@@ -227,6 +227,9 @@ export default function App() {
           <div className="scroll-indicator">
             <span className="key-hint">Space</span> to scroll
           </div>
+          <div className="swipe-indicator">
+            <span>Swipe up to explore</span>
+          </div>
         </div>
       </section>
 

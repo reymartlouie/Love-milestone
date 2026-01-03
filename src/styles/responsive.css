@@ -28,21 +28,28 @@
 
 /* Tablet portrait */
 @media (max-width: 768px) and (orientation: portrait) {
-  .scattered-photo.top { display: none; }
-  .scattered-photo.bottom { right: 15vw; }
+  .scattered-photo.top { top: 5vh; right: 50%; transform: translateX(50%); }
+  .scattered-photo.bottom { bottom: 8vh; right: 50%; transform: translateX(50%); }
 }
 
-/* Mobile portrait */
+/* Mobile portrait - reposition all photos around the edges */
 @media (max-width: 480px) and (orientation: portrait) {
-  .scattered-photo.right,
-  .scattered-photo.bottom { display: none; }
-  .scattered-photo.top-right { top: 3vh; right: 3vw; }
-  .scattered-photo.bottom-right { bottom: 15vh; right: 3vw; }
+  .scattered-photo img {
+    width: clamp(50px, 18vw, 70px);
+    height: clamp(50px, 18vw, 70px);
+  }
+
+  .scattered-photo.top-right { top: 3vh; right: 5vw; }
+  .scattered-photo.right { top: 25vh; right: 3vw; }
+  .scattered-photo.bottom-right { bottom: 18vh; right: 5vw; }
+  .scattered-photo.bottom { bottom: 10vh; left: 5vw; right: auto; }
+  .scattered-photo.top { top: 15vh; left: 3vw; right: auto; }
 }
 
 /* Very tall screens (mobile) */
 @media (max-width: 480px) and (min-height: 700px) {
-  .scattered-photo.bottom-right { bottom: 20vh; }
+  .scattered-photo.bottom-right { bottom: 22vh; }
+  .scattered-photo.bottom { bottom: 12vh; }
 }
 
 /* Square-ish aspect ratios */
