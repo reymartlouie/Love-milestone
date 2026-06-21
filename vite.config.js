@@ -6,24 +6,33 @@ import { dirname, resolve } from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-// Plugin to handle optional private milestones file
+// Plugin to handle optional private data files (milestones, movies)
 function optionalPrivateFiles() {
-  const privateFilePath = resolve(__dirname, 'src/milestones.private.js')
-  const fileExists = existsSync(privateFilePath)
+  const privateFiles = {
+    'milestones.private.js': '\0virtual:empty-milestones',
+    'movies.private.js': '\0virtual:empty-movies',
+  }
+
+  const fileExists = Object.fromEntries(
+    Object.keys(privateFiles).map(name => [
+      name,
+      existsSync(resolve(__dirname, 'src', name))
+    ])
+  )
 
   return {
     name: 'optional-private-files',
     enforce: 'pre',
     resolveId(source) {
-      if (source === './milestones.private.js' || source.endsWith('/milestones.private.js')) {
-        if (!fileExists) {
-          return '\0virtual:empty-milestones'
+      for (const [name, virtualId] of Object.entries(privateFiles)) {
+        if (source === `./${name}` || source.endsWith(`/${name}`)) {
+          if (!fileExists[name]) return virtualId
         }
       }
       return null
     },
     load(id) {
-      if (id === '\0virtual:empty-milestones') {
+      if (Object.values(privateFiles).includes(id)) {
         return 'export default null;'
       }
       return null

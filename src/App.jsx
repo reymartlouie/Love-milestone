@@ -12,7 +12,8 @@ import {
   ScatteredPhotos,
   MemoryCounter,
   MusicPlayer,
-  LoveLetter
+  LoveLetter,
+  MoviesSection
 } from './components';
 
 // Your relationship start date
@@ -247,6 +248,9 @@ export default function App() {
           ))}
         </div>
       </main>
+
+      {/* Movies Section */}
+      <MoviesSection />
 
       <footer className="apple-footer">
         <div className="footer-card">

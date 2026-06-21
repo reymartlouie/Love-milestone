@@ -6,3 +6,4 @@ export { default as ScatteredPhotos } from './ScatteredPhotos';
 export { default as MemoryCounter } from './MemoryCounter';
 export { default as MusicPlayer } from './MusicPlayer';
 export { default as LoveLetter } from './LoveLetter';
+export { default as MoviesSection } from './MoviesSection';
