@@ -65,9 +65,7 @@
 .timeline-item.right { justify-content: flex-end; }
 
 .timeline-content {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  background: rgba(255, 255, 255, 0.92);
   padding: 24px;
   width: 46%;
   position: relative;
@@ -137,7 +135,7 @@
   }
 
   .timeline-content {
-    background: rgba(45, 45, 48, 0.75);
+    background: rgba(38, 38, 42, 0.96);
     border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }

@@ -2,21 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const ParticleHearts = () => {
   const [particles, setParticles] = useState([]);
-  const [floatingHearts, setFloatingHearts] = useState([]);
   const nextId = useRef(0);
-
-  // Generate initial floating hearts
-  useEffect(() => {
-    const hearts = Array.from({ length: 15 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      delay: Math.random() * 10,
-      duration: 15 + Math.random() * 10,
-      size: 20 + Math.random() * 30,
-      emoji: ['💕', '💝', '❤️', '💖', '💗'][Math.floor(Math.random() * 5)]
-    }));
-    setFloatingHearts(hearts);
-  }, []);
 
   const createBurst = (x, y) => {
     const burstParticles = Array.from({ length: 12 }, () => ({
@@ -36,35 +22,16 @@ const ParticleHearts = () => {
     }, 2000);
   };
 
-  // Handle clicks at document level so page content remains clickable
   useEffect(() => {
-    const handleClick = (e) => {
-      createBurst(e.clientX, e.clientY);
-    };
-
+    const handleClick = (e) => createBurst(e.clientX, e.clientY);
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
+  if (particles.length === 0) return null;
+
   return (
     <div className="particle-hearts-container">
-      {/* Floating background hearts */}
-      {floatingHearts.map(heart => (
-        <div
-          key={heart.id}
-          className="floating-particle-heart"
-          style={{
-            left: `${heart.left}%`,
-            fontSize: `${heart.size}px`,
-            animationDelay: `${heart.delay}s`,
-            animationDuration: `${heart.duration}s`
-          }}
-        >
-          {heart.emoji}
-        </div>
-      ))}
-
-      {/* Burst particles */}
       {particles.map(particle => (
         <div
           key={particle.id}
