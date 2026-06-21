@@ -7,3 +7,4 @@ export { default as MemoryCounter } from './MemoryCounter';
 export { default as MusicPlayer } from './MusicPlayer';
 export { default as LoveLetter } from './LoveLetter';
 export { default as MoviesSection } from './MoviesSection';
+export { default as SeriesCard } from './SeriesCard';

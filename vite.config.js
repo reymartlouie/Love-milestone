@@ -11,6 +11,7 @@ function optionalPrivateFiles() {
   const privateFiles = {
     'milestones.private.js': '\0virtual:empty-milestones',
     'movies.private.js': '\0virtual:empty-movies',
+    'series.private.js': '\0virtual:empty-series',
   }
 
   const fileExists = Object.fromEntries(
