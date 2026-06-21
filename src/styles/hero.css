@@ -8,15 +8,29 @@
   top: 0;
   padding: clamp(80px, 15vh, 120px) clamp(16px, 4vw, 24px);
   padding-left: clamp(24px, 10vw, 15%);
-  background: linear-gradient(
-    135deg,
-    #fdf6f0 0%,
-    #f8e8e0 25%,
-    #fce4ec 50%,
-    #f3e5f5 75%,
-    #ede7f6 100%
-  );
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.60) 0%,
+      rgba(0, 0, 0, 0.30) 55%,
+      rgba(0, 0, 0, 0.08) 100%
+    ),
+    url('/images/hero-bg.jpg') center / cover no-repeat;
   z-index: 1;
+}
+
+.hero .hero-title,
+.hero .hero-subtitle {
+  color: #ffffff;
+}
+
+.hero .hero-date,
+.hero .counter-label,
+.hero .counter-value,
+.hero .special-milestone,
+.hero .scroll-indicator,
+.hero .swipe-indicator {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .hero-content {
@@ -255,14 +269,14 @@
 /* ===== DARK MODE ===== */
 @media (prefers-color-scheme: dark) {
   .hero {
-    background: linear-gradient(
-      135deg,
-      #1a1a2e 0%,
-      #2d1f3d 25%,
-      #1f2937 50%,
-      #2d1f3d 75%,
-      #1a1a2e 100%
-    );
+    background:
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0.45) 55%,
+        rgba(0, 0, 0, 0.15) 100%
+      ),
+      url('/images/hero-bg.jpg') center / cover no-repeat;
   }
 
   .scattered-photo img {
