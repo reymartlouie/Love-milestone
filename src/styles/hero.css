@@ -15,7 +15,7 @@
       rgba(0, 0, 0, 0.30) 55%,
       rgba(0, 0, 0, 0.08) 100%
     ),
-    url('/images/hero-bg.jpg') center / cover no-repeat;
+    url('/images/hero-bg.webp') center / cover no-repeat;
   z-index: 1;
 }
 
@@ -276,7 +276,7 @@
         rgba(0, 0, 0, 0.45) 55%,
         rgba(0, 0, 0, 0.15) 100%
       ),
-      url('/images/hero-bg.jpg') center / cover no-repeat;
+      url('/images/hero-bg.webp') center / cover no-repeat;
   }
 
   .scattered-photo img {
