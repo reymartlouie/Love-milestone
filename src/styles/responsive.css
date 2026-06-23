@@ -192,8 +192,6 @@
   .modal-info h3 { font-size: 13px; }
   .modal-info p { font-size: 10px; }
 
-  .floating-particle-heart { font-size: 12px !important; }
-  .burst-particle { font-size: 10px !important; }
 }
 
 /* Mobile phones */
@@ -214,6 +212,4 @@
     transition-duration: 0.01ms !important;
   }
 
-  .floating-particle-heart,
-  .burst-particle { display: none; }
 }

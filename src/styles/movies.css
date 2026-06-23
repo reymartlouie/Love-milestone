@@ -120,7 +120,7 @@
 
 /* ===== CARD ===== */
 .movie-card {
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--card-bg);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.75);
   box-shadow:
@@ -341,9 +341,9 @@
   }
 
   .movie-card {
-    background: rgba(28, 18, 34, 0.97);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
   }
 
   .movie-card:hover {
@@ -358,18 +358,9 @@
     color: rgba(255, 255, 255, 0.15);
   }
 
-  .segment-control {
-    background: rgba(255, 255, 255, 0.07);
-  }
-
-  .segment-btn.active {
-    background: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-  }
-
-  .segment-btn:not(.active):hover {
-    background: rgba(255, 255, 255, 0.07);
-  }
+  .segment-control { background: rgba(255, 255, 255, 0.07); }
+  .segment-btn.active { background: rgba(255, 255, 255, 0.12); }
+  .segment-btn:not(.active):hover { background: rgba(255, 255, 255, 0.07); }
 
   .series-seasons {
     background: rgba(120, 120, 255, 0.15);

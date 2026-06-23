@@ -1,0 +1,70 @@
+/* ===== DESIGN TOKENS — single source of truth for all colors ===== */
+:root {
+  /* Brand */
+  --accent:        #bf4800;
+  --accent-soft:   #e85d04;
+  --accent-glow:   rgba(191, 72, 0, 0.5);
+
+  /* Text */
+  --text-primary:   #1d1d1f;
+  --text-secondary: #86868b;
+
+  /* Backgrounds */
+  --bg-primary:   #ffffff;
+  --bg-secondary: #f5f5f7;
+
+  /* Borders */
+  --border-light: rgba(0, 0, 0, 0.08);
+
+  /* Cards */
+  --card-bg:     rgba(255, 255, 255, 0.92);
+  --card-border: rgba(0, 0, 0, 0.04);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+
+  /* Glassmorphism sections */
+  --glass-bg:         rgba(255, 255, 255, 0.55);
+  --glass-border:     rgba(255, 255, 255, 0.5);
+  --glass-shadow-top: 0 -10px 40px rgba(0, 0, 0, 0.08);
+  --glass-inset:      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  /* Status (series watch state) */
+  --status-watching:  #3b82f6;
+  --status-completed: #22c55e;
+  --status-dropped:   #ef4444;
+
+  /* Navbar */
+  --nav-bg:          rgba(20, 20, 20, 0.45);
+  --nav-border:      rgba(255, 255, 255, 0.15);
+  --nav-active-bg:   rgba(255, 255, 255, 0.18);
+  --nav-hover-bg:    rgba(255, 255, 255, 0.08);
+
+  /* Vibes / dark hero */
+  --vibes-bg-a: #0d0a1a;
+  --vibes-bg-b: #0a1220;
+  --vibes-bg-c: #1a0a10;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent:        #ff8a5b;
+    --accent-soft:   #ffab8a;
+    --accent-glow:   rgba(255, 138, 91, 0.4);
+
+    --text-primary:   #ffffff;
+    --text-secondary: #b0b0b5;
+
+    --bg-primary:   #121212;
+    --bg-secondary: #1e1e1e;
+
+    --border-light: rgba(255, 255, 255, 0.12);
+
+    --card-bg:     rgba(38, 38, 42, 0.96);
+    --card-border: rgba(255, 255, 255, 0.06);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+    --glass-bg:         rgba(18, 18, 18, 0.55);
+    --glass-border:     rgba(255, 255, 255, 0.08);
+    --glass-shadow-top: 0 -10px 40px rgba(0, 0, 0, 0.35);
+    --glass-inset:      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}

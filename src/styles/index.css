@@ -1,11 +1,14 @@
-/* Main stylesheet - imports all style modules */
+/* Design tokens must come first — all other files consume these */
+@import './tokens.css';
+
 @import './global.css';
-@import './particles.css';
 @import './loading.css';
 @import './love-letter.css';
+@import './navbar.css';
 @import './hero.css';
 @import './timeline.css';
 @import './modal.css';
 @import './music-player.css';
 @import './movies.css';
+@import './vibes.css';
 @import './responsive.css';

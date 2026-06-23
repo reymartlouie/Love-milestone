@@ -1,5 +1,3 @@
-export { default as ParallaxBackground } from './ParallaxBackground';
-export { default as ParticleHearts } from './ParticleHearts';
 export { default as TimelineItem } from './TimelineItem';
 export { default as PhotoModal } from './PhotoModal';
 export { default as ScatteredPhotos } from './ScatteredPhotos';
@@ -8,3 +6,5 @@ export { default as MusicPlayer } from './MusicPlayer';
 export { default as LoveLetter } from './LoveLetter';
 export { default as MoviesSection } from './MoviesSection';
 export { default as SeriesCard } from './SeriesCard';
+export { default as Navbar } from './Navbar';
+export { default as MusicHero } from './MusicHero';

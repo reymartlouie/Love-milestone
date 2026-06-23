@@ -4,15 +4,13 @@
   margin: 0 auto;
   padding: clamp(48px, 8vh, 80px) clamp(24px, 5vw, 48px) clamp(80px, 12vh, 120px);
   position: relative;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--glass-bg);
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid var(--glass-border);
   z-index: 2;
   border-radius: 40px 40px 0 0;
-  box-shadow:
-    0 -10px 40px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: var(--glass-shadow-top), var(--glass-inset);
 }
 
 .timeline-inner {
@@ -65,7 +63,7 @@
 .timeline-item.right { justify-content: flex-end; }
 
 .timeline-content {
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--card-bg);
   padding: 24px;
   width: 46%;
   position: relative;
@@ -124,19 +122,4 @@
   font-weight: 400;
 }
 
-/* ===== DARK MODE ===== */
-@media (prefers-color-scheme: dark) {
-  .timeline {
-    background: rgba(18, 18, 18, 0.55);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:
-      0 -10px 40px rgba(0, 0, 0, 0.35),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  }
-
-  .timeline-content {
-    background: rgba(38, 38, 42, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  }
-}
+/* Dark mode handled entirely by tokens.css — no overrides needed here */
