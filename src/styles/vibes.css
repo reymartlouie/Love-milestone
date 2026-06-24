@@ -247,33 +247,43 @@
   max-width: 360px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: clamp(12px, 2vh, 20px);
 }
 
+/* Each item is a glass pill — mirrors .player-section on homepage */
 .music-playlist-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
-  border-radius: 12px;
+  padding: 10px 18px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background 0.18s ease;
-  color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
   font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
 
 .music-playlist-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .music-playlist-item.active {
   color: #ffffff;
   font-weight: 600;
-  background: rgba(191, 72, 0, 0.15);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.20);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .playlist-dot {
