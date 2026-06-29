@@ -1,6 +1,10 @@
 import { createContext, useContext, useRef, useState, useEffect, useCallback } from 'react';
 
 export const PLAYLIST = [
+  { src: '/audio/about-you.mp3', title: 'About You' },
+  { src: '/audio/somebody-else.mp3', title: 'Somebody Else' },
+  { src: '/audio/all-i-need-to-hear.mp3', title: 'All I Need To Hear' },
+  { src: '/audio/thick-and-thin.mp3', title: 'Thick And Thin' },
   { src: '/audio/Nobody-else.mp3', title: 'Nobody Else' },
   { src: '/audio/tenerif-sea.mp3', title: 'Tenerif Sea' },
   { src: '/audio/ilysb-stripped.mp3', title: 'ILYSB' },
